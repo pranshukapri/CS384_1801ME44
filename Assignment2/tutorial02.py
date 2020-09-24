@@ -37,7 +37,13 @@ def rmse(first_list, second_list):
 # Function to compute mse. You cant use Python functions
 def mse(first_list, second_list):
     # mse Logic
-    return mse_value
+    count = 0
+    mse_value = 0
+    for i in first_list:
+        mse_value = mse_value + (first_list[count] - second_list[count])*(first_list[count] - second_list[count])
+        count = count + 1
+    mse_value = mse_value / count
+    return round(mse_value,3)
 
 
 # Function to compute mae. You cant use Python functions
