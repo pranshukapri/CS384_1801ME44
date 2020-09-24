@@ -1,3 +1,4 @@
+import math
 # All decimal 3 places
 
 # Function to compute mean
@@ -31,7 +32,8 @@ def variance(first_list):
 # Function to compute RMSE. You cant use Python functions
 def rmse(first_list, second_list):
     # RMSE Logic
-    return rmse_value
+    rmse_value = math.sqrt(mse(first_list, second_list))
+    return round(rmse_value,3)
 
 
 # Function to compute mse. You cant use Python functions
