@@ -38,7 +38,7 @@ def standard_deviation(first_list):
     if check(first_list):
         return 0
     # Standard deviation Logic
-    standard_deviation_value = 0
+    standard_deviation_value = math.sqrt(variance(first_list))
     return standard_deviation_value
 
 
