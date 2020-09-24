@@ -62,6 +62,8 @@ def rmse(first_list, second_list):
     # RMSE Logic
     if check(first_list) | check(second_list):
         return 0
+    if len(first_list) != len(second_list):
+        return 0
     rmse_value = math.sqrt(mse(first_list, second_list))
     return rmse_value
 
@@ -70,6 +72,8 @@ def rmse(first_list, second_list):
 def mse(first_list, second_list):
     # mse Logic
     if check(first_list) | check(second_list):
+        return 0
+    if len(first_list) != len(second_list):
         return 0
     count = 0
     mse_value = 0
@@ -85,6 +89,8 @@ def mae(first_list, second_list):
     # mae Logic
     if check(first_list) | check(second_list):
         return 0
+    if len(first_list) != len(second_list):
+        return 0
     mae_value = 0
     count = 0
     for i in first_list:
@@ -98,6 +104,8 @@ def mae(first_list, second_list):
 def nse(first_list, second_list):
     # nse Logic
     if check(first_list) | check(second_list):
+        return 0
+    if len(first_list) != len(second_list):
         return 0
     mean1 = mean(first_list)
     den = 0
@@ -114,6 +122,8 @@ def nse(first_list, second_list):
 def pcc(first_list, second_list):
     # nse Logic
     if check(first_list) | check(second_list):
+        return 0
+    if len(first_list) != len(second_list):
         return 0
     pcc_value = 0
     num = 0
@@ -169,7 +179,14 @@ def kurtosis(first_list):
     if check(first_list):
         return 0
     # Kurtosis Logic
+    sd = standard_deviation(first_list)
     kurtosis_value = 0
+    count = 0
+    mean1 = mean(first_list)
+    for i in first_list:
+        kurtosis_value = kurtosis_value + ((i - mean1) / sd) * ((i - mean1) / sd) * ((i - mean1) / sd) * ((i - mean1) / sd)
+        count = count + 1
+    kurtosis_value = kurtosis_value / count
     return kurtosis_value
 
 
