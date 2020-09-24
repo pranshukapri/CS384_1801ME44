@@ -25,6 +25,7 @@ def median(first_list):
         return 0
     # median Logic
     median_value = 0
+    n = len(first_list)
     return median_value
 
 
@@ -133,6 +134,11 @@ def sorting(first_list):
     if check(first_list):
         return 0
     # Sorting Logic
+    sorted_list = first_list
+    for i in sorted_list:
+        for j in range(0, n-1-1):
+             if sorted_list[j] > sorted_list[j+1]:
+                 sorted_list[j], sorted_list[j+1] = sorted_list[j+1], sorted_list[j]
     return sorted_list
 
 
