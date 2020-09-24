@@ -55,8 +55,8 @@ student_answers.append(test_case_11)
 test_case_12 = A2.rmse(p, r)  # Invalid since list  r contains non-numeric data-type e.g., string/character #Return 0
 student_answers.append(test_case_12)
 
-print(round(actual_answers,3))
-print(round(student_answers,3))
+print(actual_answers)
+print(student_answers)
 
 total_test_cases = len(actual_answers)
 count_of_correct_test_cases = 0
