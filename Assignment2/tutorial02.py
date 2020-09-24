@@ -100,7 +100,20 @@ def pcc(first_list, second_list):
     if check(first_list) | check(second_list):
         return 0
     pcc_value = 0
-    return pcc_value
+    num = 0
+    temp1 = 0
+    temp2 = 0
+    count = 0
+    mean1 = mean(first_list)
+    mean2 = mean(second_list)
+    for i in first_list:
+        num = num + (first_list[count] - mean1) * (second_list[count] - mean2)
+        temp1 = temp1 + (first_list[count] - mean1) * (first_list[count] - mean1)
+        temp2 = temp2 + (second_list[count] - mean2) * (second_list[count] - mean2)
+        count = count + 1
+    den = math.sqrt(temp1) * math.sqrt(temp2)
+    pcc_value = num/den
+    return round(pcc_value,3)
 
 
 # Function to compute Skewness. You cant use Python functions
