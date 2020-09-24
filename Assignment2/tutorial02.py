@@ -16,7 +16,7 @@ def mean(first_list):
     for i in first_list:
         count = count + 1
     mean_value = summation(first_list) / count
-    return round(mean_value,3)
+    return mean_value
 
 
 # Function to compute median. You cant use Python functions
@@ -52,7 +52,7 @@ def rmse(first_list, second_list):
     if check(first_list) | check(second_list):
         return 0
     rmse_value = math.sqrt(mse(first_list, second_list))
-    return round(rmse_value,3)
+    return rmse_value
 
 
 # Function to compute mse. You cant use Python functions
@@ -66,7 +66,7 @@ def mse(first_list, second_list):
         mse_value = mse_value + (first_list[count] - second_list[count])*(first_list[count] - second_list[count])
         count = count + 1
     mse_value = mse_value / count
-    return round(mse_value,3)
+    return mse_value
 
 
 # Function to compute mae. You cant use Python functions
@@ -75,6 +75,11 @@ def mae(first_list, second_list):
     if check(first_list) | check(second_list):
         return 0
     mae_value = 0
+    count = 0
+    for i in first_list:
+        mae_value = mae_value + abs(first_list[count] - second_list[count])
+        count = count + 1
+    mae_value = mae_value / count
     return mae_value
 
 
@@ -91,7 +96,7 @@ def nse(first_list, second_list):
         count = count + 1
     num = count * mse(first_list, second_list)
     nse_value = 1 - (num/den)
-    return round(nse_value,3)
+    return nse_value
 
 
 # Function to compute Pearson correlation coefficient. You cant use Python functions
@@ -113,7 +118,7 @@ def pcc(first_list, second_list):
         count = count + 1
     den = math.sqrt(temp1) * math.sqrt(temp2)
     pcc_value = num/den
-    return round(pcc_value,3)
+    return pcc_value
 
 
 # Function to compute Skewness. You cant use Python functions
@@ -148,4 +153,4 @@ def summation(first_list):
     summation_value = 0
     for i in first_list:
         summation_value = summation_value + i
-    return round(summation_value,3)
+    return summation_value

@@ -1,6 +1,6 @@
 import tutorial02 as A2
 
-actual_answers = [0.55, 0.64, 0.30, 0.09, -0.38, 1.99, 0.47, 0.22, 0.40, -1.47, 0.05, 0, 0, 0]
+actual_answers = [0.558, 0.641, 0.302, 0.091, -0.389, 1.997, 0.475, 0.226, 0.404, -1.476, 0.051, 0, 0, 0]
 student_answers = []
 
 import numpy as np
@@ -55,14 +55,14 @@ student_answers.append(test_case_11)
 test_case_12 = A2.rmse(p, r)  # Invalid since list  r contains non-numeric data-type e.g., string/character #Return 0
 student_answers.append(test_case_12)
 
-print(actual_answers)
-print(student_answers)
+print(round(actual_answers,3))
+print(round(student_answers,3))
 
 total_test_cases = len(actual_answers)
 count_of_correct_test_cases = 0
 
 for x, y in zip(actual_answers, student_answers):
-    if x == y:
+    if round(x,3) == round(y,3):
         count_of_correct_test_cases += 1
 
 print(f"Test Cases Passed = '{count_of_correct_test_cases}'  / '{total_test_cases}'")
