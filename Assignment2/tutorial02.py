@@ -47,7 +47,13 @@ def variance(first_list):
     if check(first_list):
         return 0
     # variance Logic
+    count = 0
+    mean1 = mean(first_list)
     variance_value = 0
+    for i in first_list:
+        variance_value = variance_value + (i - mean1) * (i - mean1)
+        count = count + 1
+    variance_value = variance_value / count
     return variance_value
 
 
