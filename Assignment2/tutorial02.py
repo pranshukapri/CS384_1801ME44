@@ -137,7 +137,14 @@ def skewness(first_list):
     if check(first_list):
         return 0
     # Skewness Logic
+    sd = standard_deviation(first_list)
     skewness_value = 0
+    count = 0
+    mean1 = mean(first_list)
+    for i in first_list:
+        skewness_value = skewness_value + ((i - mean1) / sd) * ((i - mean1) / sd) * ((i - mean1) / sd)
+        count = count + 1
+    skewness_value = skewness_value / count
     return skewness_value
     
 def sorting(first_list):
