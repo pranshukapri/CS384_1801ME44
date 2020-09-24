@@ -3,7 +3,11 @@
 # Function to compute mean
 def mean(first_list):
     # mean Logic 
-    return mean_value
+    count = 0
+    for i in first_list:
+        count = count + 1
+    mean_value = summation(first_list) / count
+    return round(mean_value,3)
 
 
 # Function to compute median. You cant use Python functions
