@@ -353,12 +353,3 @@ def new_file_sort():
                              
     os.chdir(cwd)
     pass
-
-course()
-country()
-email_domain_extract()
-gender()
-dob()
-blood_group()
-state()
-new_file_sort()
