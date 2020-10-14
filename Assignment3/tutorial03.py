@@ -145,6 +145,28 @@ def email_domain_extract():
 
 def gender():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender"):
+            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
+        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
+        
+        for row in csv_read:
+            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
+            
+            gender = row["gender"]
+            
+            fieldnames = row.keys()
+            if not os.path.isfile('./' + gender + '.csv'):
+                with open('./' + gender + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row)
+            else:
+                with open('./' + gender + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row)
     pass
 
 
@@ -171,3 +193,4 @@ def new_file_sort():
 course()
 country()
 email_domain_extract()
+gender()
