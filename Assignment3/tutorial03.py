@@ -314,15 +314,39 @@ def new_file_sort():
                 row2 = {"id": row["id"], "first_name": first_name, "last_name": last_name, "country": row["country"], "email": row["email"], "gender": row["gender"], "dob": row["dob"], "blood_group": row["blood_group"], "state": row["state"]}
             
             fieldnames = row2.keys()
-            if not os.path.isfile('./studentinfo cs384 names split.csv'):
-                with open('./studentinfo cs384 names split.csv', 'a', newline='') as misc_file:
+            if not os.path.isfile('./studentinfo_cs384_names_split.csv'):
+                with open('./studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writeheader()
                     Writer_misc.writerow(row2)
             else:
-                with open('./studentinfo cs384 names split.csv', 'a', newline='') as misc_file:
+                with open('./studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row2)
+                    
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/studentinfo_cs384_names_split.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        temp = list(csv_read)
+        
+        length = len(temp)
+        
+        for i in range(length):
+            for j in range(length-1):
+                    if temp[j+1]["first_name"] < temp[j]["first_name"]:
+                        temp[j], temp[j+1] = temp[j+1], temp[j]
+        
+        for rows in temp:
+            fieldnames = rows.keys()
+            if not os.path.isfile('./studentinfo_cs384_names_split_sorted_first_name.csv'):
+                with open('./studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(rows)
+            else:
+                with open('./studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(rows)
+                             
     os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
