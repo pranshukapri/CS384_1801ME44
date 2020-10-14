@@ -80,6 +80,28 @@ def course():
 
 def country():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country"):
+            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
+        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
+        
+        for row in csv_read:
+            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
+            
+            country = row["country"]
+            
+            fieldnames = row.keys()
+            if not os.path.isfile('./' + country + '.csv'):
+                with open('./' + country + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row)
+            else:
+                with open('./' + country + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row)
     pass
 
 
@@ -114,3 +136,4 @@ def new_file_sort():
     pass
 
 course()
+country()
