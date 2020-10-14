@@ -107,6 +107,39 @@ def country():
 
 def email_domain_extract():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email"):
+            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
+        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
+        
+        for row in csv_read:
+            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
+            
+            temp = row["email"]
+            domain = ''
+            flag = 0
+            
+            for i in temp:
+                if i == '@':
+                    flag = 1
+                    continue
+                if i == '.':
+                    break
+                if flag == 1:
+                    domain = domain + i
+            
+            fieldnames = row.keys()
+            if not os.path.isfile('./' + domain + '.csv'):
+                with open('./' + domain + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row)
+            else:
+                with open('./' + domain + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row)
     pass
 
 
@@ -137,3 +170,4 @@ def new_file_sort():
 
 course()
 country()
+email_domain_extract()
