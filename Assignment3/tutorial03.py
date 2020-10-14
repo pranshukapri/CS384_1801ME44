@@ -75,6 +75,7 @@ def course():
                     with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv', 'a', newline='') as misc_file:
                         Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                         Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -102,6 +103,7 @@ def country():
                 with open('./' + country + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -140,6 +142,7 @@ def email_domain_extract():
                 with open('./' + domain + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -167,6 +170,7 @@ def gender():
                 with open('./' + gender + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -207,6 +211,7 @@ def dob():
                 with open('./' + dob + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -234,6 +239,7 @@ def state():
                 with open('./' + state + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
@@ -279,12 +285,45 @@ def blood_group():
                 with open('./' + blood_group + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 
 # Create the new file here and also sort it in this function only.
 def new_file_sort():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        for row in csv_read:
+            
+            full_name = row["full_name"]
+            first_name = ''
+            last_name = ''
+            
+            flag = 0
+            for i in full_name:
+                if i == ' ':
+                    flag = 1
+                    continue
+                if flag == 0:
+                    first_name = first_name + i
+                else:
+                    last_name = last_name + i
+                    
+                row2 = {"id": row["id"], "first_name": first_name, "last_name": last_name, "country": row["country"], "email": row["email"], "gender": row["gender"], "dob": row["dob"], "blood_group": row["blood_group"], "state": row["state"]}
+            
+            fieldnames = row2.keys()
+            if not os.path.isfile('./studentinfo cs384 names split.csv'):
+                with open('./studentinfo cs384 names split.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row2)
+            else:
+                with open('./studentinfo cs384 names split.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row2)
+    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
     pass
 
 course()
@@ -294,3 +333,4 @@ gender()
 dob()
 blood_group()
 state()
+new_file_sort()
