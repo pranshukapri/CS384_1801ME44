@@ -172,6 +172,41 @@ def gender():
 
 def dob():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob"):
+            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
+        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
+        
+        for row in csv_read:
+            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
+            
+            temp = row["dob"][6] + row["dob"][7] + row["dob"][8] + row["dob"][9]
+            
+            if temp>='1995' and temp<='1999':
+                dob = 'bday_1995_1999'
+            elif temp<='2004':
+                dob = 'bday_2000_2004'
+            elif temp<='2009':
+                dob = 'bday_2005_2009'
+            elif temp<='2014':
+                dob = 'bday_2010_2014'
+            elif temp<='2019':
+                dob = 'bday_2015_2020'
+            else:
+                dob = 'misc'
+            
+            fieldnames = row.keys()
+            if not os.path.isfile('./' + dob + '.csv'):
+                with open('./' + dob + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row)
+            else:
+                with open('./' + dob + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row)
     pass
 
 
@@ -194,3 +229,4 @@ course()
 country()
 email_domain_extract()
 gender()
+dob()
