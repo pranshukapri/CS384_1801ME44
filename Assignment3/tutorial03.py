@@ -1,25 +1,30 @@
+### IMP: All the files and folders are created in the working directory of the file and not where the .py file is saved!!
+
 import csv
 import os
 import shutil
 os.system('cls')
 
-if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics"):
-    os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics")
+cwd = os.getcwd()
+
+if not os.path.isdir('./Analytics'):
+    os.mkdir('./Analytics')
 else:
-    shutil.rmtree("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics")
-    os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics")
+    shutil.rmtree('./Analytics')
+    os.mkdir('./Analytics')
 
 def course():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course")
+        if not os.path.isdir("./Analytics/Course"):
+            os.mkdir("./Analytics/Course")
+        os.chdir("./Analytics/Course")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course")
+            os.chdir(cwd + "/Analytics/Course")
             if row["id"][0].isdigit() and row["id"][1].isdigit() and row["id"][2].isdigit() and row["id"][3].isdigit() and row["id"][4].isalpha() and row["id"][5].isalpha() and row["id"][6].isdigit() and row["id"][7].isdigit():
                 
                 course = row["id"][4] + row["id"][5]
@@ -35,13 +40,13 @@ def course():
                     degree = 'Phd'
                 else:
                     fieldnames = row.keys()
-                    if not os.path.isfile('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv'):
-                        with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv', 'a', newline='') as misc_file:
+                    if not os.path.isfile('./misc.csv'):
+                        with open('./misc.csv', 'a', newline='') as misc_file:
                             Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                             Writer_misc.writeheader()
                             Writer_misc.writerow(row)
                     else:
-                        with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv', 'a', newline='') as misc_file:
+                        with open('./misc.csv', 'a', newline='') as misc_file:
                             Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                             Writer_misc.writerow(row)
                         
@@ -66,30 +71,30 @@ def course():
                 
             else:
                 fieldnames = row.keys()
-                if not os.path.isfile('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv'):
-                    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv', 'a', newline='') as misc_file:
+                if not os.path.isfile('./misc.csv'):
+                    with open('./misc.csv', 'a', newline='') as misc_file:
                         Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                         Writer_misc.writeheader()
                         Writer_misc.writerow(row)
                 else:
-                    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Course/misc.csv', 'a', newline='') as misc_file:
+                    with open('./misc.csv', 'a', newline='') as misc_file:
                         Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                         Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def country():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
+        if not os.path.isdir("./Analytics/Country"):
+            os.mkdir("./Analytics/Country")
+        os.chdir("./Analytics/Country")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Country")
             
             country = row["country"]
             
@@ -103,21 +108,21 @@ def country():
                 with open('./' + country + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def email_domain_extract():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
+        if not os.path.isdir("./Analytics/Email"):
+            os.mkdir("./Analytics/Email")
+        os.chdir("./Analytics/Email")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Email")
             
             temp = row["email"]
             domain = ''
@@ -142,21 +147,21 @@ def email_domain_extract():
                 with open('./' + domain + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def gender():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
+        if not os.path.isdir("./Analytics/Gender"):
+            os.mkdir("./Analytics/Gender")
+        os.chdir("./Analytics/Gender")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Gender")
             
             gender = row["gender"]
             
@@ -170,21 +175,20 @@ def gender():
                 with open('./' + gender + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def dob():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
+        if not os.path.isdir("./Analytics/Dob"):
+            os.mkdir("./Analytics/Dob")
+        os.chdir("./Analytics/Dob")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Dob")
             
             temp = row["dob"][6] + row["dob"][7] + row["dob"][8] + row["dob"][9]
             
@@ -211,21 +215,21 @@ def dob():
                 with open('./' + dob + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def state():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/State"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/State")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/State")
+        if not os.path.isdir("./Analytics/State"):
+            os.mkdir("./Analytics/State")
+        os.chdir("./Analytics/State")
         
         for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/State")
             
             state = row["state"]
             
@@ -239,22 +243,21 @@ def state():
                 with open('./' + state + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 def blood_group():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
-        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group"):
-            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
-        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
+        if not os.path.isdir("./Analytics/Blood_Group"):
+            os.mkdir("./Analytics/Blood_Group")
+        os.chdir("./Analytics/Blood_Group")
         
-        for row in csv_read:
-            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
-            
+        for row in csv_read:            
             
             if row["blood_group"] == 'a+' or row["blood_group"] == 'A+':
                 blood_group = 'A+'
@@ -285,14 +288,15 @@ def blood_group():
                 with open('./' + blood_group + '.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row)
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 
 # Create the new file here and also sort it in this function only.
 def new_file_sort():
     # Read csv and process
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+    os.chdir(cwd)
+    with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
         for row in csv_read:
@@ -314,17 +318,17 @@ def new_file_sort():
                 row2 = {"id": row["id"], "first_name": first_name, "last_name": last_name, "country": row["country"], "email": row["email"], "gender": row["gender"], "dob": row["dob"], "blood_group": row["blood_group"], "state": row["state"]}
             
             fieldnames = row2.keys()
-            if not os.path.isfile('./studentinfo_cs384_names_split.csv'):
-                with open('./studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
+            if not os.path.isfile('./Analytics/studentinfo_cs384_names_split.csv'):
+                with open('./Analytics/studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writeheader()
                     Writer_misc.writerow(row2)
             else:
-                with open('./studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
+                with open('./Analytics/studentinfo_cs384_names_split.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(row2)
                     
-    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/studentinfo_cs384_names_split.csv', 'r') as csv_file:
+    with open('./Analytics/studentinfo_cs384_names_split.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         temp = list(csv_read)
         
@@ -337,17 +341,17 @@ def new_file_sort():
         
         for rows in temp:
             fieldnames = rows.keys()
-            if not os.path.isfile('./studentinfo_cs384_names_split_sorted_first_name.csv'):
-                with open('./studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
+            if not os.path.isfile('./Analytics/studentinfo_cs384_names_split_sorted_first_name.csv'):
+                with open('./Analytics/studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writeheader()
                     Writer_misc.writerow(rows)
             else:
-                with open('./studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
+                with open('./Analytics/studentinfo_cs384_names_split_sorted_first_name.csv', 'a', newline='') as misc_file:
                     Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
                     Writer_misc.writerow(rows)
                              
-    os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/")
+    os.chdir(cwd)
     pass
 
 course()
