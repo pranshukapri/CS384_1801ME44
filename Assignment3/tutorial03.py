@@ -212,11 +212,52 @@ def dob():
 
 def state():
     # Read csv and process
+    
     pass
 
 
 def blood_group():
     # Read csv and process
+    with open('g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/studentinfo_cs384.csv', 'r') as csv_file:
+        csv_read = csv.DictReader(csv_file, delimiter=',')
+        
+        if not os.path.isdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group"):
+            os.mkdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
+        os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
+        
+        for row in csv_read:
+            os.chdir("g:/Study Materials/5th Sem/CS384/CS384_1801ME44/Assignment3/Analytics/Blood_Group")
+            
+            
+            if row["blood_group"] == 'a+' or row["blood_group"] == 'A+':
+                blood_group = 'A+'
+            elif row["blood_group"] == 'a-' or row["blood_group"] == 'A-':
+                blood_group = 'A-'
+            elif row["blood_group"] == 'b+' or row["blood_group"] == 'B+':
+                blood_group = 'B+'
+            elif row["blood_group"] == 'b-' or row["blood_group"] == 'B-':
+                blood_group = 'B-'
+            elif row["blood_group"] == 'o+' or row["blood_group"] == 'O+':
+                blood_group = 'O+'
+            elif row["blood_group"] == 'o-' or row["blood_group"] == 'O-':
+                blood_group = 'O-'
+            elif row["blood_group"] == 'ab+' or row["blood_group"] == 'AB+' or row["blood_group"] == 'Ab+' or row["blood_group"] == 'aB+':
+                blood_group = 'AB+'
+            elif row["blood_group"] == 'ab-' or row["blood_group"] == 'AB-' or row["blood_group"] == 'Ab-' or row["blood_group"] == 'aB-':
+                blood_group = 'AB-'
+            else:
+                blood_group = 'misc'
+                
+            fieldnames = row.keys()
+            if not os.path.isfile('./' + blood_group + '.csv'):
+                with open('./' + blood_group + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writeheader()
+                    Writer_misc.writerow(row)
+            else:
+                with open('./' + blood_group + '.csv', 'a', newline='') as misc_file:
+                    Writer_misc = csv.DictWriter(misc_file, fieldnames=fieldnames, delimiter=',')
+                    Writer_misc.writerow(row)
     pass
 
 
@@ -230,3 +271,4 @@ country()
 email_domain_extract()
 gender()
 dob()
+blood_group()
