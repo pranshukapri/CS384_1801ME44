@@ -5,16 +5,19 @@ import os
 import shutil
 os.system('cls')
 
-cwd = os.getcwd()
-
-if not os.path.isdir('./Analytics'):
-    os.mkdir('./Analytics')
-else:
-    shutil.rmtree('./Analytics')
-    os.mkdir('./Analytics')
+def del_create_analytics_folder():
+    # del the analytics folder including subfolder
+    # mkdir the analytics folder (only mkdir)
+    if not os.path.isdir('./Analytics'):
+        os.mkdir('./Analytics')
+    else:
+        shutil.rmtree('./Analytics')
+        os.mkdir('./Analytics')
+    pass
 
 def course():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -86,6 +89,7 @@ def course():
 
 def country():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -114,6 +118,7 @@ def country():
 
 def email_domain_extract():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -153,6 +158,7 @@ def email_domain_extract():
 
 def gender():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -181,6 +187,7 @@ def gender():
 
 def dob():
     # Read csv and process
+    cwd = os.getcwd()
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
         
@@ -221,6 +228,7 @@ def dob():
 
 def state():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -249,6 +257,7 @@ def state():
 
 def blood_group():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
@@ -295,6 +304,7 @@ def blood_group():
 # Create the new file here and also sort it in this function only.
 def new_file_sort():
     # Read csv and process
+    cwd = os.getcwd()
     os.chdir(cwd)
     with open('./studentinfo_cs384.csv', 'r') as csv_file:
         csv_read = csv.DictReader(csv_file, delimiter=',')
