@@ -1,20 +1,80 @@
+import os
+import re
 
 def rename_FIR(folder_name):
     # rename Logic 
-    
+    e_padding = int(input("Enter the Episode Number Padding:"))
+    list = os.listdir("./Subtitles/" + folder_name)
+    for name in list:
+        try:
+            e_no = re.search(r'Episode\s(\d+)', name).group(1)
+        except:
+            e_no = re.search(r'Ep\s(\d+)', name).group(1)
+        
+        ext = '.' + re.search(r'(.{3})$', name).group(1)
+        
+        while 1:
+            if len(e_no) >= e_padding:
+                break
+            else:
+                e_no = '0' + e_no
+        
+        new_name = folder_name + ' ' + 'Episode' + ' ' + e_no
+        
+        try:
+            os.rename("./Subtitles/" + folder_name + "/" + name, "./Subtitles/" + folder_name + "/" + new_name + ext)
+        except WindowsError:
+            os.rename("./Subtitles/" + folder_name + "/" + name, "./Subtitles/" + folder_name + "/" + new_name + '(1)' + ext)
 
 def rename_Game_of_Thrones(folder_name):
     # rename Logic 
-    
+    s_padding = int(input("Enter the Season Number Padding:"))
+    e_padding = int(input("Enter the Episode Number Padding:"))
+    list = os.listdir("./Subtitles/" + folder_name)
+    for name in list:
+        print(name)
 
 def rename_Sherlock(folder_name):
     # rename Logic 
-    
+    s_padding = int(input("Enter the Season Number Padding:"))
+    e_padding = int(input("Enter the Episode Number Padding:"))
+    list = os.listdir("./Subtitles/" + folder_name)
+    for name in list:
+        print(name)
 
 def rename_Suits(folder_name):
     # rename Logic 
-    
+    s_padding = int(input("Enter the Season Number Padding:"))
+    e_padding = int(input("Enter the Episode Number Padding:"))
+    list = os.listdir("./Subtitles/" + folder_name)
+    for name in list:
+        print(name)
 
 def rename_How_I_Met_Your_Mother(folder_name):
     # rename Logic 
+    s_padding = int(input("Enter the Season Number Padding:"))
+    e_padding = int(input("Enter the Episode Number Padding:"))
+    list = os.listdir("./Subtitles/" + folder_name)
+    for name in list:
+        print(name)
     
+print("Select the Series to Rename:")
+print("1. FIR")
+print("2. Game of Thrones")
+print("3. Sherlock")
+print("4. Suits")
+print("5. How I Met Your Mother")
+i = int(input())
+
+if i == 1:
+    rename_FIR("FIR")
+elif i == 2:
+    rename_Game_of_Thrones("Game of Thrones")
+elif i == 3:
+    rename_Sherlock("Sherlock")
+elif i == 4:
+    rename_Suits("Suits")
+elif i == 5:
+    rename_How_I_Met_Your_Mother("How I Met Your Mother")
+else:
+    print("Wrong Input")
