@@ -100,7 +100,36 @@ def rename_Suits(folder_name):
     e_padding = int(input("Enter the Episode Number Padding:"))
     list = os.listdir("./Subtitles/" + folder_name)
     for name in list:
-        print(name)
+        
+        e_no = re.search(r'\s(\d+)x(\d+)\s', name).group(2)
+        s_no = re.search(r'\s(\d+)x(\d+)\s', name).group(1)
+        ext = '.' + re.search(r'(.{3})$', name).group(1)
+        
+        e_name = re.search(r'\s(\d+)x(\d+)\s-\s(.*?)\.', name)
+        
+        if not e_name:
+            e_name = ''
+        else:
+            e_name = ' - ' + e_name.group(3)
+        
+        while 1:
+            if len(e_no) >= e_padding:
+                break
+            else:
+                e_no = '0' + e_no
+        
+        while 1:
+            if len(s_no) >= s_padding:
+                break
+            else:
+                s_no = '0' + s_no
+        
+        new_name = folder_name + ' - Season ' + s_no + ' Episode ' + e_no + e_name
+        
+        try:
+            os.rename("./Subtitles/" + folder_name + "/" + name, "./Subtitles/" + folder_name + "/" + new_name + ext)
+        except WindowsError:
+            os.rename("./Subtitles/" + folder_name + "/" + name, "./Subtitles/" + folder_name + "/" + new_name + '(1)' + ext)
 
 def rename_How_I_Met_Your_Mother(folder_name):
     # rename Logic 
